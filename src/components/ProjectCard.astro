@@ -1,0 +1,25 @@
+---
+type Props = {
+  title: string;
+  desc: string;
+  stack: string[];
+  live?: string;
+  repo?: string;
+};
+
+const { title, desc, stack, live, repo } = Astro.props;
+---
+
+<article class="rounded-2xl border border-black/10 p-4">
+  <h3 class="mb-2 text-lg font-semibold">{title}</h3>
+  <p class="mb-3 text-sm text-black/80">{desc}</p>
+
+  <p class="mb-3 text-sm text-black/70">
+    <span class="font-semibold">Stack:</span> {stack.join(" · ")}
+  </p>
+
+  <div class="flex flex-wrap gap-3 text-sm">
+    {live && <a class="underline" href={live} target="_blank">Demo</a>}
+    {repo && <a class="underline" href={repo} target="_blank">Repo</a>}
+  </div>
+</article>

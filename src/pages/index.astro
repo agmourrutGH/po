@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data/projects";
+import "../styles/global.css";
 
 const name = "Agustín Mourrut";
 const role = "Desarrollador Web Junior (Frontend / Full-Stack)";
@@ -37,7 +38,7 @@ const metaDesc = `${name}. ${role}. ${tagline}`;
 
       <a
         class="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm font-semibold text-zinc-900
-               transition hover:bg-zinc-50"
+               transition hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-200"
         href={links.linkedin}
         target="_blank"
         rel="noreferrer"
@@ -47,50 +48,67 @@ const metaDesc = `${name}. ${role}. ${tagline}`;
     </div>
   </header>
 
-  <main class="mx-auto max-w-6xl">
+  <main class="mx-auto max-w-6xl pb-16">
     <!-- Hero -->
     <section class="py-14 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
         <div>
-          <p class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700">
+          <p class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 shadow-sm">
             <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
             Disponible para primer empleo
           </p>
 
-          <h1 class="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-            {name}
-          </h1>
+          <!-- Name + Photo -->
+          <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-6">
+            <img
+              src="/me.jpeg"
+              alt="Foto de Agustín Mourrut"
+              width="160"
+              height="160"
+              class="h-28 w-28 rounded-3xl border border-zinc-200 object-cover shadow-sm sm:h-36 sm:w-36"
+              loading="eager"
+              decoding="async"
+            />
 
-          <p class="mt-3 text-base text-zinc-700">{role}</p>
-          <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-600">
-            {tagline}
-          </p>
+            <div class="min-w-0">
+              <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+                {name}
+              </h1>
 
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a
-              class="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800"
-              href="#proyectos"
-            >
-              Ver proyectos
-            </a>
+              <p class="mt-2 text-base text-zinc-700">{role}</p>
 
-            <a
-              class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900
-                     transition hover:bg-zinc-50"
-              href={links.github}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub ↗
-            </a>
+              <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-600">
+                {tagline}
+              </p>
 
-            <a
-              class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900
-                     transition hover:bg-zinc-50"
-              href={links.email}
-            >
-              Email
-            </a>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a
+                  class="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800
+                         focus:outline-none focus:ring-2 focus:ring-zinc-300"
+                  href="#proyectos"
+                >
+                  Ver proyectos
+                </a>
+
+                <a
+                  class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900
+                         transition hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-200"
+                  href={links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub ↗
+                </a>
+
+                <a
+                  class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900
+                         transition hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-200"
+                  href={links.email}
+                >
+                  Email
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -135,7 +153,6 @@ const metaDesc = `${name}. ${role}. ${tagline}`;
     <section id="stack" class="scroll-mt-24 py-12">
       <div class="mb-6">
         <h2 class="text-2xl font-semibold tracking-tight">Stack</h2>
-        <p class="mt-2 text-zinc-600">Menos humo, más foco.</p>
       </div>
 
       <div class="grid gap-4 sm:grid-cols-2">
@@ -150,7 +167,9 @@ const metaDesc = `${name}. ${role}. ${tagline}`;
         </div>
 
         <div class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-          <h3 class="text-sm font-semibold text-zinc-900">En aprendizaje / secundario</h3>
+          <h3 class="text-sm font-semibold text-zinc-900">
+            En aprendizaje / secundario
+          </h3>
           <ul class="mt-4 space-y-2 text-sm text-zinc-700">
             <li>Java + Spring Boot</li>
             <li>MySQL / MongoDB</li>
@@ -168,13 +187,29 @@ const metaDesc = `${name}. ${role}. ${tagline}`;
       </div>
 
       <div class="flex flex-wrap gap-3">
-        <a class="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:bg-zinc-800" href={links.email}>
+        <a
+          class="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:bg-zinc-800
+                 focus:outline-none focus:ring-2 focus:ring-zinc-300"
+          href={links.email}
+        >
           Email
         </a>
-        <a class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50" href={links.linkedin} target="_blank" rel="noreferrer">
+        <a
+          class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50
+                 focus:outline-none focus:ring-2 focus:ring-zinc-200"
+          href={links.linkedin}
+          target="_blank"
+          rel="noreferrer"
+        >
           LinkedIn ↗
         </a>
-        <a class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50" href={links.github} target="_blank" rel="noreferrer">
+        <a
+          class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50
+                 focus:outline-none focus:ring-2 focus:ring-zinc-200"
+          href={links.github}
+          target="_blank"
+          rel="noreferrer"
+        >
           GitHub ↗
         </a>
       </div>

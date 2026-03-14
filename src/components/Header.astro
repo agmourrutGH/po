@@ -42,10 +42,10 @@
     <!-- Actions -->
     <div class="flex items-center gap-3">
       <a
-        id="cvButton"
+        id="cvHeader"
         href="/cv-agustin-mourrut-en.pdf"
-        data-en="Curriculum"
-        data-es="CV"
+        target="_blank"
+        rel="noopener"
         class="rounded-xl border border-zinc-200 px-3 py-2 text-sm font-semibold hover:bg-zinc-50"
       >
         Curriculum
@@ -60,40 +60,3 @@
     </div>
   </div>
 </header>
-
-<script>
-  function initLanguage() {
-    const langButton = document.getElementById(
-      "langToggle",
-    ) as HTMLButtonElement | null;
-    let lang = localStorage.getItem("lang") || "en";
-
-    function applyLanguage() {
-      document.querySelectorAll("[data-en]").forEach((el) => {
-        const element = el as HTMLElement;
-        const value = element.dataset[lang as "en" | "es"];
-        if (value != null) element.textContent = value;
-      });
-
-      if (langButton) {
-        langButton.textContent = lang === "en" ? "ES" : "EN";
-      }
-    }
-
-    applyLanguage();
-
-    if (langButton) {
-      langButton.addEventListener("click", () => {
-        lang = lang === "en" ? "es" : "en";
-        localStorage.setItem("lang", lang);
-        applyLanguage();
-      });
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initLanguage);
-  } else {
-    initLanguage();
-  }
-</script>

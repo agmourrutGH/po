@@ -1,32 +1,44 @@
-const button = document.getElementById("langToggle");
+function initLanguage() {
+  const langButton = document.getElementById("langToggle");
+  const cvHeader = document.getElementById("cvHeader");
+  const cvContact = document.getElementById("cvContact");
 
-let lang = localStorage.getItem("lang") || "en";
+  let lang =
+    localStorage.getItem("lang") ||
+    (navigator.language.startsWith("es") ? "es" : "en");
 
-button.addEventListener("click", () => {
-  lang = lang === "en" ? "es" : "en";
-  localStorage.setItem("lang", lang);
-  location.reload();
-});
+  function applyLanguage() {
+    document.querySelectorAll("[data-en]").forEach((el) => {
+      const value = el.dataset[lang];
+      if (value) el.textContent = value;
+    });
 
-function applyLanguage() {
-  document.querySelectorAll("[data-en]").forEach((el) => {
-    const element = el;
-    const value = element.dataset[lang];
-    if (value != null) element.textContent = value;
-  });
+    const cvFile =
+      lang === "en"
+        ? "/cv-agustin-mourrut-en.pdf"
+        : "/cv-agustin-mourrut-es.pdf";
 
-  if (langButton) {
-    langButton.textContent = lang === "en" ? "ES" : "EN";
+    if (cvHeader) cvHeader.href = cvFile;
+    if (cvContact) cvContact.href = cvFile;
+
+    if (langButton) {
+      langButton.textContent = lang === "en" ? "ES" : "EN";
+    }
+
+    document.documentElement.lang = lang;
   }
 
-  const cvHeader = document.getElementById("cvButton");
-  const cvContact = document.getElementById("cvDownload");
+  applyLanguage();
 
-  const cvFile =
-    lang === "en"
-      ? "/CV%20Agustin%20Mourrut%20EN.pdf"
-      : "/CV%20Agustin%20Mourrut%20ES.pdf";
+  if (langButton) {
+    langButton.addEventListener("click", () => {
+      lang = lang === "en" ? "es" : "en";
+      localStorage.setItem("lang", lang);
+      applyLanguage();
+    });
+  }
+}
 
-  if (cvHeader) cvHeader.href = cvFile;
-  if (cvContact) cvContact.href = cvFile;
+if (typeof window !== "undefined") {
+  document.addEventListener("DOMContentLoaded", initLanguage);
 }

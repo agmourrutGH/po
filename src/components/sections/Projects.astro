@@ -1,0 +1,31 @@
+---
+import ProjectCard from "../ProjectCard.astro";
+import SectionTitle from "../SectionTitle.astro";
+import { projects } from "../../data/projects";
+
+const featured = projects[0];
+const rest = projects.slice(1);
+---
+
+<section id="projects" class="py-24 fade-in">
+
+  <SectionTitle
+    title="Projects"
+    titleEs="Proyectos"
+    subtitle="Some projects I've worked on."
+    subtitleEs="Algunos proyectos en los que he trabajado."
+  />
+
+  <!-- Featured project -->
+  <div class="mt-12">
+    <ProjectCard {...featured} featured />
+  </div>
+
+  <!-- Other projects -->
+  <div class="mt-10 grid gap-6 sm:grid-cols-2">
+    {rest.map((p) => (
+      <ProjectCard {...p} />
+    ))}
+  </div>
+
+</section>

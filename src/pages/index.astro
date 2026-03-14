@@ -1,222 +1,29 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import { projects } from "../data/projects";
-import "../styles/global.css";
+import Header from "../components/Header.astro";
 
-const name = "Agustín Mourrut";
-const role = "Desarrollador Web Junior (Frontend / Full-Stack)";
-const tagline =
-  "Construyo interfaces limpias y aplicaciones web mantenibles con foco en buenas prácticas y experiencia de usuario.";
-
-const about =
-  "Graduado en Desarrollo de Software (IES Santa Fe). Busco mi primer empleo como desarrollador, aportando en frontend y creciendo en un equipo con procesos reales.";
-
-const links = {
-  github: "https://github.com/agmourrutGH",
-  linkedin: "https://www.linkedin.com/in/agustin-mourrut/",
-  email: "mailto:agusmourrut@gmail.com",
-};
-
-const metaTitle = `${name} — Portfolio`;
-const metaDesc = `${name}. ${role}. ${tagline}`;
+import About from "../components/sections/About.astro";
+import Education from "../components/sections/Education.astro";
+import Experience from "../components/sections/Experience.astro";
+import Skills from "../components/sections/Skills.astro";
+import Projects from "../components/sections/Projects.astro";
+import Contact from "../components/sections/Contact.astro";
+import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout title={metaTitle} description={metaDesc}>
-  <!-- Navbar -->
-  <header class="sticky top-0 z-40 border-b border-zinc-200 bg-white/80 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between py-4">
-      <a href="#" class="font-semibold tracking-tight">
-        {name.split(" ")[0]}<span class="text-zinc-400">.</span>
-      </a>
+<Layout title="Agustin Mourrut">
+  <Header />
 
-      <nav class="hidden items-center gap-6 text-sm text-zinc-600 sm:flex">
-        <a class="hover:text-zinc-900" href="#proyectos">Proyectos</a>
-        <a class="hover:text-zinc-900" href="#stack">Stack</a>
-        <a class="hover:text-zinc-900" href="#contacto">Contacto</a>
-      </nav>
+  <main class="mx-auto max-w-6xl px-6">
+    <Hero />
 
-      <a
-        class="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm font-semibold text-zinc-900
-               transition hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-200"
-        href={links.linkedin}
-        target="_blank"
-        rel="noreferrer"
-      >
-        LinkedIn
-      </a>
-    </div>
-  </header>
-
-  <main class="mx-auto max-w-6xl pb-16">
-    <!-- Hero -->
-    <section class="py-14 sm:py-20">
-      <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-        <div>
-          <p class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 shadow-sm">
-            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-            Disponible para primer empleo
-          </p>
-
-          <!-- Name + Photo -->
-          <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-6">
-            <img
-              src="/me.jpeg"
-              alt="Foto de Agustín Mourrut"
-              width="160"
-              height="160"
-              class="h-28 w-28 rounded-3xl border border-zinc-200 object-cover shadow-sm sm:h-36 sm:w-36"
-              loading="eager"
-              decoding="async"
-            />
-
-            <div class="min-w-0">
-              <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
-                {name}
-              </h1>
-
-              <p class="mt-2 text-base text-zinc-700">{role}</p>
-
-              <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-600">
-                {tagline}
-              </p>
-
-              <div class="mt-6 flex flex-wrap gap-3">
-                <a
-                  class="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800
-                         focus:outline-none focus:ring-2 focus:ring-zinc-300"
-                  href="#proyectos"
-                >
-                  Ver proyectos
-                </a>
-
-                <a
-                  class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900
-                         transition hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-200"
-                  href={links.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub ↗
-                </a>
-
-                <a
-                  class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900
-                         transition hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-200"
-                  href={links.email}
-                >
-                  Email
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side card -->
-        <aside class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-          <h2 class="text-sm font-semibold text-zinc-900">Resumen</h2>
-          <p class="mt-3 text-sm leading-relaxed text-zinc-600">{about}</p>
-
-          <div class="mt-5 grid gap-3 text-sm text-zinc-700">
-            <div class="flex items-center justify-between rounded-xl bg-zinc-50 px-4 py-3">
-              <span class="text-zinc-500">Ubicación</span>
-              <span>Argentina</span>
-            </div>
-            <div class="flex items-center justify-between rounded-xl bg-zinc-50 px-4 py-3">
-              <span class="text-zinc-500">Foco</span>
-              <span>React / Next</span>
-            </div>
-            <div class="flex items-center justify-between rounded-xl bg-zinc-50 px-4 py-3">
-              <span class="text-zinc-500">Nivel</span>
-              <span>Junior</span>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="proyectos" class="scroll-mt-24 py-12">
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold tracking-tight">Proyectos</h2>
-        <p class="mt-2 text-zinc-600">
-          Dos proyectos para mostrar trabajo en equipo + desarrollo individual.
-        </p>
-      </div>
-
-      <div class="grid gap-4 sm:grid-cols-2">
-        {projects.map((p) => <ProjectCard {...p} />)}
-      </div>
-    </section>
-
-    <!-- Stack -->
-    <section id="stack" class="scroll-mt-24 py-12">
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold tracking-tight">Stack</h2>
-      </div>
-
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-          <h3 class="text-sm font-semibold text-zinc-900">Principal</h3>
-          <ul class="mt-4 space-y-2 text-sm text-zinc-700">
-            <li>JavaScript / TypeScript</li>
-            <li>React / Next.js</li>
-            <li>HTML / CSS / Tailwind</li>
-            <li>Git / GitHub</li>
-          </ul>
-        </div>
-
-        <div class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-          <h3 class="text-sm font-semibold text-zinc-900">
-            En aprendizaje / secundario
-          </h3>
-          <ul class="mt-4 space-y-2 text-sm text-zinc-700">
-            <li>Java + Spring Boot</li>
-            <li>MySQL / MongoDB</li>
-            <li>Automatización / PLC (plus)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contacto" class="scroll-mt-24 py-12">
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold tracking-tight">Contacto</h2>
-        <p class="mt-2 text-zinc-600">Si te interesa mi perfil, hablemos.</p>
-      </div>
-
-      <div class="flex flex-wrap gap-3">
-        <a
-          class="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:bg-zinc-800
-                 focus:outline-none focus:ring-2 focus:ring-zinc-300"
-          href={links.email}
-        >
-          Email
-        </a>
-        <a
-          class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50
-                 focus:outline-none focus:ring-2 focus:ring-zinc-200"
-          href={links.linkedin}
-          target="_blank"
-          rel="noreferrer"
-        >
-          LinkedIn ↗
-        </a>
-        <a
-          class="rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50
-                 focus:outline-none focus:ring-2 focus:ring-zinc-200"
-          href={links.github}
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub ↗
-        </a>
-      </div>
-    </section>
-
-    <footer class="border-t border-zinc-200 py-10 text-sm text-zinc-500">
-      © {new Date().getFullYear()} {name}
-    </footer>
+    <About />
+    <Education />
+    <Skills />
+    <Projects />
+    <Experience />
+    <Contact />
+    <Footer />
   </main>
 </Layout>

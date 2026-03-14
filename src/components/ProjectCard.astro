@@ -18,7 +18,7 @@ const {
   repo,
   live,
   image,
-  featured = false
+  featured = false,
 } = Astro.props as Props;
 ---
 
@@ -27,7 +27,6 @@ const {
     featured ? "lg:flex lg:gap-10 lg:p-10" : ""
   }`}
 >
-
   <!-- image -->
   <div class="overflow-hidden border-b border-zinc-200">
     <img
@@ -39,49 +38,63 @@ const {
 
   <!-- content -->
   <div class="p-6">
-
     <header>
-      <h3 class="text-base font-semibold tracking-tight" data-en={title.en} data-es={title.es}>
+      <h3
+        class="text-base font-semibold tracking-tight"
+        data-en={title.en}
+        data-es={title.es}
+      >
         {title.en}
       </h3>
 
-      <p class="mt-2 text-sm leading-relaxed text-zinc-600" data-en={desc.en} data-es={desc.es}>
+      <p
+        class="mt-2 text-sm leading-relaxed text-zinc-600"
+        data-en={desc.en}
+        data-es={desc.es}
+      >
         {desc.en}
       </p>
     </header>
 
     <!-- bullets -->
     <ul class="mt-4 space-y-2 text-sm text-zinc-700">
-      {bullets.map((b) => (
-        <li class="flex gap-2">
-          <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400"></span>
-          <span data-en={b.en} data-es={b.es}>{b.en}</span>
-        </li>
-      ))}
+      {
+        bullets.map((b) => (
+          <li class="flex gap-2">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
+            <span data-en={b.en} data-es={b.es}>
+              {b.en}
+            </span>
+          </li>
+        ))
+      }
     </ul>
 
     <!-- stack -->
     <div class="mt-4 flex flex-wrap gap-2">
-      {stack.map((s) => (
-        <span class="rounded-full bg-zinc-100 px-3 py-1 text-[12px] text-zinc-700">
-          {s}
-        </span>
-      ))}
+      {
+        stack.map((s) => (
+          <span class="rounded-full bg-zinc-100 px-3 py-1 text-[12px] text-zinc-700">
+            {s}
+          </span>
+        ))
+      }
     </div>
 
     <!-- buttons -->
     <div class="mt-5 flex flex-wrap gap-3">
-
-      {live && (
-        <a
-          class="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800"
-          href={live}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Demo ↗
-        </a>
-      )}
+      {
+        live && (
+          <a
+            class="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800"
+            href={live}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Demo ↗
+          </a>
+        )
+      }
 
       <a
         class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50"
@@ -91,9 +104,6 @@ const {
       >
         Repo ↗
       </a>
-
     </div>
-
   </div>
-
 </article>

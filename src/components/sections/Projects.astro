@@ -8,7 +8,6 @@ const rest = projects.slice(1);
 ---
 
 <section id="projects" class="py-24 fade-in">
-
   <SectionTitle
     title="Projects"
     titleEs="Proyectos"
@@ -23,9 +22,6 @@ const rest = projects.slice(1);
 
   <!-- Other projects -->
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
-    {rest.map((p) => (
-      <ProjectCard {...p} />
-    ))}
+    {rest.map((p) => <ProjectCard {...p} />)}
   </div>
-
 </section>

@@ -15,13 +15,140 @@ const rest = projects.slice(1);
     subtitleEs="Algunos proyectos en los que he trabajado."
   />
 
-  <!-- Featured project -->
   <div class="mt-12">
     <ProjectCard {...featured} featured />
   </div>
 
-  <!-- Other projects -->
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
     {rest.map((p) => <ProjectCard {...p} />)}
   </div>
 </section>
+
+<!-- 🔥 GALERÍA PRO -->
+<div id="gallery-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 opacity-0 pointer-events-none transition-opacity duration-300">
+
+  <button onclick="closeGallery()" class="absolute top-5 right-5 text-white text-2xl">✕</button>
+
+  <button onclick="prevImage()" class="absolute left-5 text-white text-3xl">‹</button>
+  <button onclick="nextImage()" class="absolute right-5 text-white text-3xl">›</button>
+
+  <img id="gallery-image"
+    class="max-h-[80vh] max-w-[90vw] rounded-lg shadow-lg transition-opacity duration-300" />
+</div>
+
+<script is:inline>
+  let currentImages = [];
+  let currentIndex = 0;
+
+  function openGallery(images, index) {
+    currentImages = images;
+    currentIndex = index;
+
+    document.body.style.overflow = "hidden";
+
+    updateImage();
+
+    const modal = document.getElementById("gallery-modal");
+    if (!modal) return;
+
+    modal.classList.remove("opacity-0", "pointer-events-none");
+  }
+
+  function openGalleryFromElement(el) {
+    const images = JSON.parse(el.dataset.images || "[]");
+    const index = Number(el.dataset.index || 0);
+
+    openGallery(images, index);
+  }
+
+  function closeGallery() {
+    document.body.style.overflow = "";
+
+    const modal = document.getElementById("gallery-modal");
+    if (!modal) return;
+
+    modal.classList.add("opacity-0", "pointer-events-none");
+  }
+
+  function updateImage() {
+    const img = document.getElementById("gallery-image");
+    if (!img) return;
+
+    img.style.opacity = "0";
+
+    setTimeout(() => {
+      img.src = currentImages[currentIndex];
+      img.style.opacity = "1";
+    }, 150);
+  }
+
+  function nextImage() {
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateImage();
+  }
+
+  function prevImage() {
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateImage();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("gallery-modal");
+    if (!modal) return;
+
+    modal.addEventListener("click", (e) => {
+      if (e.target && e.target.id === "gallery-modal") {
+        closeGallery();
+      }
+    });
+  });
+
+  function changeMainImage(cardId, img, index) {
+  const main = document.getElementById(`main-img-${cardId}`);
+  if (!main) return;
+
+  main.src = img;
+
+  // 🔥 MUY IMPORTANTE
+  main.dataset.index = index;
+
+  // 🔥 esto asegura que siga teniendo las imágenes
+  if (!main.dataset.images) return;
+
+  // highlight
+  const thumbs = document.querySelectorAll(`[data-card="${cardId}"]`);
+
+  thumbs.forEach((el) => {
+    el.classList.remove("ring-2", "ring-black");
+  });
+
+  const active = document.querySelector(
+    `[data-card="${cardId}"][data-index="${index}"]`
+  );
+
+  if (active) {
+    active.classList.add("ring-2", "ring-black");
+  }
+}
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeGallery();
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "ArrowLeft") prevImage();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[id^='main-img-']").forEach((main) => {
+    const cardId = main.id.replace("main-img-", "");
+    const activeThumb = document.querySelector(
+      `[data-card="${cardId}"][data-index="1"]`
+    );
+
+    if (activeThumb) {
+      activeThumb.classList.add("ring-2", "ring-black");
+    }
+  });
+});
+</script>

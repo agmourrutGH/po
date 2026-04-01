@@ -3,9 +3,8 @@ export type Project = {
   desc: { en: string; es: string };
   bullets: { en: string; es: string }[];
   stack: string[];
-  repo: string;
   live?: string;
-  image: string;
+  images: string[];
 };
 
 export const projects: Project[] = [
@@ -25,8 +24,13 @@ export const projects: Project[] = [
       { en: "PostgreSQL persistence", es: "Persistencia con PostgreSQL" }
     ],
     stack: ["React", "Spring Boot", "PostgreSQL"],
-    repo: "https://github.com/agmourrutGH",
-    image: "/projects/nautica.png"
+    images: [
+      "/images/sist-nautica/nautica-login.webp",
+      "/images/sist-nautica/nautica-admin.webp",
+      "/images/sist-nautica/nautica-admin-cliente.webp",
+      "/images/sist-nautica/nautica-cliente.webp",
+      "/images/sist-nautica/nautica-operario.webp"
+    ]
   },
   {
     title: { en: "Brekky", es: "Brekky" },
@@ -41,7 +45,10 @@ export const projects: Project[] = [
       { en: "MVC architecture with PHP", es: "Arquitectura MVC con PHP" }
     ],
     stack: ["PHP", "Twig", "JavaScript", "CSS"],
-    repo: "https://github.com/agmourrutGH",
-    image: "/projects/brekky.png"
+    images: [
+      "/images/brekky/brekky-home.webp",
+      "/images/brekky/brekky-menu.webp",
+      "/images/brekky/brekky-galeria.webp"
+    ]
   }
 ];

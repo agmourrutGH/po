@@ -4,9 +4,8 @@ interface Props {
   desc: { en: string; es: string };
   bullets: { en: string; es: string }[];
   stack: string[];
-  repo: string;
   live?: string;
-  image: string;
+  images: string[];
   featured?: boolean;
 }
 
@@ -15,11 +14,14 @@ const {
   desc,
   bullets,
   stack,
-  repo,
   live,
-  image,
+  images = [],
   featured = false,
 } = Astro.props as Props;
+
+const mainImage = images[0] ?? "/projects/placeholder.png";
+const otherImages = images.slice(1);
+const cardId = title.en.replace(/\s+/g, "-").toLowerCase();
 ---
 
 <article
@@ -28,12 +30,34 @@ const {
   }`}
 >
   <!-- image -->
-  <div class="overflow-hidden border-b border-zinc-200">
+  <div class="border-b border-zinc-200 p-3">
+    <!-- 🔥 Imagen principal -->
     <img
-      src={image}
+      id={`main-img-${cardId}`}
+      src={mainImage}
       alt={title.en}
-      class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+      class="h-48 w-full object-cover rounded-lg cursor-pointer transition duration-300 hover:scale-[1.02] hover:brightness-90"
+      data-images={JSON.stringify(images)}
+      data-index="0"
+      onclick="openGalleryFromElement(this)"
     />
+
+    <!-- 🔥 SOLO otras imágenes -->
+    {
+      otherImages.length > 0 && (
+        <div class="flex gap-2 mt-2">
+          {otherImages.map((img, i) => (
+            <img
+              src={img}
+              class="thumb w-16 h-16 object-cover rounded-md cursor-pointer border border-zinc-200 transition hover:opacity-80 hover:scale-105"
+              data-card={cardId}
+              data-index={i + 1}
+              onclick={`changeMainImage('${cardId}', \`${img}\`, ${i + 1})`}
+            />
+          ))}
+        </div>
+      )
+    }
   </div>
 
   <!-- content -->
@@ -95,15 +119,6 @@ const {
           </a>
         )
       }
-
-      <a
-        class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50"
-        href={repo}
-        target="_blank"
-        rel="noreferrer"
-      >
-        Repo ↗
-      </a>
     </div>
   </div>
 </article>

@@ -19,7 +19,7 @@ const rest = projects.slice(1);
     <ProjectCard {...featured} featured />
   </div>
 
-  <div class="mt-10 grid gap-6 sm:grid-cols-2">
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {rest.map((p) => <ProjectCard {...p} />)}
   </div>
 </section>

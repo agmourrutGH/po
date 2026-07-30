@@ -50,5 +50,50 @@ export const projects: Project[] = [
       "/images/brekky/brekky-menu.webp",
       "/images/brekky/brekky-galeria.webp"
     ]
-  }
+  },
+  {
+  title: {
+    en: "Pharmacy Queue Management System",
+    es: "Sistema de Gestión de Turnos para Farmacia"
+  },
+  desc: {
+    en: "Turn/queue management system for a pharmacy, with a public waiting-room display and a real-time admin panel.",
+    es: "Sistema de gestión de turnos para una farmacia, con pantalla pública para la sala de espera y panel administrativo en tiempo real."
+  },
+  bullets: [
+    { en: "Real-time turn calling via WebSockets (Socket.IO)", es: "Llamado de turnos en tiempo real vía WebSockets (Socket.IO)" },
+    { en: "Separate public display for the waiting room TV", es: "Pantalla pública independiente para la TV de la sala de espera" },
+    { en: "Admin panel with analytics: peak hours, cashier performance, Excel export", es: "Panel admin con estadísticas: pico de hora, rendimiento de cajas, exportación a Excel" },
+    { en: "Desktop app built with Tauri + React", es: "Aplicación de escritorio construida con Tauri + React" }
+  ],
+  stack: ["Tauri", "React", "NestJS", "Prisma", "PostgreSQL", "Socket.IO"],
+  images: [
+    "/images/turnero-farmacia/farmacia-turno-tablet.png",
+    "/images/turnero-farmacia/farmacia-gestion-turnos.png",
+    "/images/turnero-farmacia/farmacia-reservaciones.png",
+    "/images/turnero-farmacia/farmacia-panel-admin.png"
+  ]
+},
+{
+  title: {
+    en: "Biotelek — Corporate & Sales Website",
+    es: "Biotelek — Sitio Web Corporativo y de Ventas"
+  },
+  desc: {
+    en: "Corporate website for Biotelek, exclusive Argentine distributor of Meditech Pharma robotic logistics solutions for pharmacies.",
+    es: "Sitio web corporativo para Biotelek, distribuidor exclusivo en Argentina de soluciones de logística robótica Meditech Pharma para farmacias."
+  },
+  bullets: [
+    { en: "Multi-language site (Spanish, English, Portuguese) with flag-based switcher", es: "Sitio multi-idioma (español, inglés y portugués) con selector por banderas" },
+    { en: "Product showcase for the Meditech robotic equipment line", es: "Sección de productos con la línea de equipos robóticos Meditech" },
+    { en: "Integrated WhatsApp contact button", es: "Botón de contacto integrado con WhatsApp" },
+    { en: "Sections for company history, services and contact", es: "Secciones de historia de la empresa, servicios y contacto" }
+  ],
+  stack: ["HTML", "CSS", "JavaScript"],
+  images: [
+    "/images/biotelek-pag/pantalla-1.png",
+    "/images/biotelek-pag/pantalla-2.png",
+    "/images/biotelek-pag/pantalla-3.png"
+  ]
+}
 ];
